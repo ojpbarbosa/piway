@@ -8,10 +8,14 @@ def generate_icon():
     draw = ImageDraw.Draw(image)
 
     for i in range(8):
+        count = 0
+
         for j in range(8):
-            if random() < 0.5:
+            if random() < 0.5 and count < 3:
                 draw.rectangle((i * 32, j * 32, i * 32 + 32,
                                j * 32 + 32), fill='#ffffff')
+
+                count += 1
 
     timestamp = datetime.timestamp(datetime.now())
 
