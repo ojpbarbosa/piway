@@ -7,17 +7,17 @@
   <br />
   <br />
 
-  ```bash
-  # clone the game's repository
+  ```
+  # clone the game repository
   $ git clone https://github.com/ojpbarbosa/piway.git
 
-  # cd into the game's directory
+  # cd into the game directory
   $ cd piway
 
-  # create the game's virtual environment
+  # create the game virtual environment
   $ python -m venv venv
 
-  # activate the game's virtual environment
+  # activate the game virtual environment
   $ .\venv\Scripts\activate
 
   # install the game packages
