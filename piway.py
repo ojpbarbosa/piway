@@ -6,11 +6,11 @@ pygame.init()
 
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-pygame.display.set_caption('Conway\'s Game of Life')
+pygame.display.set_caption('Piway\'s Game of Life')
 pygame.display.set_icon(pygame.image.load(generate_icon()))
 
 
-def conway():
+def piway():
     running = True
 
     while running:
@@ -22,4 +22,4 @@ def conway():
 
 
 if __name__ == '__main__':
-    conway()
+    piway()
