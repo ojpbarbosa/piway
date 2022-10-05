@@ -15,11 +15,9 @@ def generate_icon():
 
     timestamp = datetime.timestamp(datetime.now())
 
-    file_name = f'icon-{timestamp}'
+    image.save(f'./icons/{timestamp}.png')
 
-    image.save(f'./icons/{file_name}.png')
-
-    return f'./icons/{file_name}.png'
+    return f'./icons/{timestamp}.png'
 
 
 if __name__ == '__main__':
