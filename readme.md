@@ -5,6 +5,7 @@
   <h2>How to run</h2>
   You must have Python installed in order to run the game.
   <br />
+  <br />
 
   ```bash
   # create the virtual environment
@@ -14,12 +15,11 @@
   $ .\venv\Scripts\activate
 
   # install the game packages
-  $ pip install -r requirements
+  $ pip install -r requirements.txt
 
   # launch the game
   $ python conway.py
   ```
-  <br />
   <h2>References</h2>
   <ul>
     <li><a href="https://www.python.org/">Python</a></li>
