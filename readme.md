@@ -22,7 +22,7 @@
   $ pip install -r requirements.txt
 
   # launch the game
-  $ python .\piway\piway.py
+  $ python .\piway\game.py
   ```
   <b>Note:</b> Python is <i>required</i> in order to run Piway's Game of Life.
 

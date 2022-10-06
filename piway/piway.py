@@ -1,55 +1,109 @@
+import tkinter
+import numpy
 import pygame
-
-from icon import generate
 from theme import colors
-from conway import Conway
-# import Button from button
+from time import sleep
 
 
-def piway():
-    pygame.init()
+class Piway:
+    def __init__(self, screen):
+        self.screen = screen
 
-    clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.world = []
 
-    pygame.display.set_caption('Piway\'s Game of Life')
-    pygame.display.set_icon(pygame.image.load(generate()))
+        root = tkinter.Tk()
+        self.columns = root.winfo_screenwidth() // 24 # 24px per cell
+        # self.rows = int(root.winfo_screenheight() *
+        #                 0.9) // 24 # 90% of screen height
+        self.rows = root.winfo_screenheight() // 24
 
-    conway = Conway(screen)
+        self.world = numpy.ndarray(shape=(self.columns, self.rows), dtype=int)
 
-    # restart_button = Button(screen, colors['primary'])
+        for y in range(self.rows):
+            for x in range(self.columns):
+                self.world[x, y] = 0
 
-    running = True
+        self.alive_cells = 0
+        self.dead_cells = 0
+        self.cell_count = 0
+        self.generation = 0
 
-    while running:
-      screen.fill(colors['primary'])
-      clock.tick(60)
+        self.paused = False
 
-      for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+    def compute_next_generation(self):
+        self.screen.fill(colors['primary'])
 
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_ESCAPE:
-                    running = False
+        for y in range(self.rows):
+            for x in range(self.columns):
+                if self.world[x, y] == 1:
+                    pygame.draw.rect(self.screen, colors['secondary'],
+                                     (x * 24, y * 24, 24, 24))
+                            
 
-                elif event.key == pygame.K_SPACE or event.key == pygame.K_p:
-                    conway.paused = not conway.paused
+                else:
+                    pygame.draw.rect(self.screen, colors['shade'],
+                                     (x * 24, y * 24, 24, 24), 1)
 
-      if pygame.mouse.get_pressed()[0]:
-          x, y = pygame.mouse.get_pos()
+        if not self.paused:
+          next_generation_world = numpy.ndarray(
+            shape=(self.columns, self.rows), dtype=int)
 
-          conway.handle_click(x, y)
+          for y in range(self.rows):
+              for x in range(self.columns):
+                  cell = self.world[x, y]
+                  neighbors = self.get_cell_neighbors(x, y)
 
-        #   if restart_button.hovering(x, y):
-        #       restart_button.draw()
+                  if cell == 0 and neighbors == 3:
+                      next_generation_world[x, y] = 1
+                      
+                      self.alive_cells += 1
+                      self.cell_count += 1
 
-      conway.compute_next_generation()
+                  elif cell == 1 and (neighbors < 2 or neighbors > 3):
+                      next_generation_world[x, y] = 0
 
-      pygame.display.update()
+                      self.alive_cells -= 1
+                      self.dead_cells += 1
 
-    pygame.quit()
+                  else:
+                      next_generation_world[x, y] = cell
+
+          self.world = next_generation_world
+          self.generation += 1
+
+
+        sleep(0.1)
+
+    def get_cell_neighbors(self, x, y):
+        neighbors = 0
+
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                x_edge = (x + i + self.columns) % self.columns
+                y_edge = (y + j + self.rows) % self.rows
+
+                neighbors += self.world[x_edge, y_edge]
+
+        neighbors -= self.world[x, y]
+
+        return neighbors
+
+    def handle_click(self, x, y):
+        x_scaled = x // 24
+        y_scaled = y // 24
+
+        if x_scaled >= self.columns or y_scaled >= self.rows:
+            pass
+
+        elif self.world[x_scaled, y_scaled] == 0:
+            self.world[x_scaled, y_scaled] = 1
+
+            self.alive_cells += 1
+            self.cell_count += 1
+
+        else:
+            self.world[x_scaled, y_scaled] = 0
 
 
 if __name__ == '__main__':
-    piway()
+    Conway()
