@@ -1,6 +1,8 @@
 <samp>
   <h2>Summary</h2>
-  Piway's Game of Life is a <a href="https://www.raspberrypi.org/">Raspberry Pi</a>-developed <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a> made in <a href="https://www.python.org/">Python</a> using <a href="https://www.pygame.org/">pygame</a>. Therefore, graphics and visual resources are at their minimum, extracting the most performance from the computer.
+  <p>
+    Piway's Game of Life is a <a href="https://www.raspberrypi.org/">Raspberry Pi</a>-developed cellular automaton <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a> style game made in <a href="https://www.python.org/">Python</a> using <a href="https://www.pygame.org/">pygame</a>. Therefore, graphics and visual resources are at their minimum, extracting the most performance from the computer.
+  </p>
   <br />
   <h2>Play</h2>
 
