@@ -35,6 +35,6 @@
   
   <h2>Resources</h2>
   <ul>
-    <li><a href="http://www.superluigibros.com/downloads/fonts/emulogic_font.zip">Emulogic Font</a> by <a href="http://www.superluigibros.com/mario-bros-fonts">Super Luigi Bros</a>
+    <li><a href="http://www.superluigibros.com/downloads/fonts/emulogic_font.zip">Emulogic Font</a> by <a href="http://www.superluigibros.com/">Super Luigi Bros</a>
   </ul>
 </samp>
