@@ -32,4 +32,9 @@
     <li><a href="https://www.pygame.org/">pygame</a></li>
     <li><a href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
   </ul>
+  
+  <h2>Resources</h2>
+  <ul>
+    <li><a href="http://www.superluigibros.com/downloads/fonts/emulogic_font.zip">Emulogic Font</a> by <a href="http://www.superluigibros.com/mario-bros-fonts">Super Luigi Bros</a>
+  </ul>
 </samp>

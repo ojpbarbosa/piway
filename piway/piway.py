@@ -3,6 +3,7 @@ import pygame
 from icon import generate
 from theme import colors
 from conway import Conway
+# import Button from button
 
 
 def piway():
@@ -16,8 +17,9 @@ def piway():
 
     conway = Conway(screen)
 
+    # restart_button = Button(screen, colors['primary'])
+
     running = True
-    paused = False
 
     while running:
       screen.fill(colors['primary'])
@@ -32,14 +34,17 @@ def piway():
                     running = False
 
                 elif event.key == pygame.K_SPACE or event.key == pygame.K_p:
-                    paused = not paused
+                    conway.paused = not conway.paused
 
       if pygame.mouse.get_pressed()[0]:
           x, y = pygame.mouse.get_pos()
 
-          conway.click(x, y)
+          conway.handle_click(x, y)
 
-      conway.update(paused)
+        #   if restart_button.hovering(x, y):
+        #       restart_button.draw()
+
+      conway.compute_next_generation()
 
       pygame.display.update()
 
