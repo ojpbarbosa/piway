@@ -1,8 +1,9 @@
-import tkinter
-import numpy
+import tkinter as tk
+import numpy as np
 import pygame
-from theme import colors
 from time import sleep
+
+from theme import colors
 
 
 class Piway:
@@ -11,13 +12,13 @@ class Piway:
 
         self.world = []
 
-        root = tkinter.Tk()
-        self.columns = root.winfo_screenwidth() // 24 # 24px per cell
+        root = tk.Tk()
+        self.columns = root.winfo_screenwidth() // 24  # 24px per cell
         # self.rows = int(root.winfo_screenheight() *
         #                 0.9) // 24 # 90% of screen height
         self.rows = root.winfo_screenheight() // 24
 
-        self.world = numpy.ndarray(shape=(self.columns, self.rows), dtype=int)
+        self.world = np.ndarray(shape=(self.columns, self.rows), dtype=int)
 
         for y in range(self.rows):
             for x in range(self.columns):
@@ -38,39 +39,37 @@ class Piway:
                 if self.world[x, y] == 1:
                     pygame.draw.rect(self.screen, colors['secondary'],
                                      (x * 24, y * 24, 24, 24))
-                            
 
                 else:
                     pygame.draw.rect(self.screen, colors['shade'],
                                      (x * 24, y * 24, 24, 24), 1)
 
         if not self.paused:
-          next_generation_world = numpy.ndarray(
-            shape=(self.columns, self.rows), dtype=int)
+            next_generation_world = np.ndarray(
+                shape=(self.columns, self.rows), dtype=int)
 
-          for y in range(self.rows):
-              for x in range(self.columns):
-                  cell = self.world[x, y]
-                  neighbors = self.get_cell_neighbors(x, y)
+            for y in range(self.rows):
+                for x in range(self.columns):
+                    cell = self.world[x, y]
+                    neighbors = self.get_cell_neighbors(x, y)
 
-                  if cell == 0 and neighbors == 3:
-                      next_generation_world[x, y] = 1
-                      
-                      self.alive_cells += 1
-                      self.cell_count += 1
+                    if cell == 0 and neighbors == 3:
+                        next_generation_world[x, y] = 1
 
-                  elif cell == 1 and (neighbors < 2 or neighbors > 3):
-                      next_generation_world[x, y] = 0
+                        self.alive_cells += 1
+                        self.cell_count += 1
 
-                      self.alive_cells -= 1
-                      self.dead_cells += 1
+                    elif cell == 1 and (neighbors < 2 or neighbors > 3):
+                        next_generation_world[x, y] = 0
 
-                  else:
-                      next_generation_world[x, y] = cell
+                        self.alive_cells -= 1
+                        self.dead_cells += 1
 
-          self.world = next_generation_world
-          self.generation += 1
+                    else:
+                        next_generation_world[x, y] = cell
 
+            self.world = next_generation_world
+            self.generation += 1
 
         sleep(0.1)
 
@@ -103,7 +102,3 @@ class Piway:
 
         else:
             self.world[x_scaled, y_scaled] = 0
-
-
-if __name__ == '__main__':
-    Conway()

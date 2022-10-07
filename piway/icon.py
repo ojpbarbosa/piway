@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 from random import random
-from os import listdir, mkdir
 from datetime import datetime
+from os import listdir, mkdir
 
 from theme import colors
 
