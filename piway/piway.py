@@ -29,6 +29,8 @@ class Piway:
         self.cell_count = 0
         self.generation = 0
 
+        self.generation_timeout = 0.1
+
         self.paused = False
 
     def compute_next_generation(self):
@@ -71,7 +73,7 @@ class Piway:
             self.world = next_generation_world
             self.generation += 1
 
-        sleep(0.1)
+        sleep(self.generation_timeout)
 
     def get_cell_neighbors(self, x, y):
         neighbors = 0
@@ -88,17 +90,17 @@ class Piway:
         return neighbors
 
     def handle_click(self, x, y):
-        x_scaled = x // 24
-        y_scaled = y // 24
+        scaled_x = x // 24
+        scaled_y = y // 24
 
-        if x_scaled >= self.columns or y_scaled >= self.rows:
+        if scaled_x >= self.columns or scaled_y >= self.rows:
             pass
 
-        elif self.world[x_scaled, y_scaled] == 0:
-            self.world[x_scaled, y_scaled] = 1
+        elif self.world[scaled_x, scaled_y] == 0:
+            self.world[scaled_x, scaled_y] = 1
 
             self.alive_cells += 1
             self.cell_count += 1
 
         else:
-            self.world[x_scaled, y_scaled] = 0
+            self.world[scaled_x, scaled_y] = 0
