@@ -6,26 +6,25 @@
   <h2>Play</h2>
 
   ```bash
-  # clone the game repository
+  # clone the game's repository
   $ git clone https://github.com/ojpbarbosa/piway.git
 
-  # cd into the game directory
+  # cd into the game's directory
   $ cd piway
 
-  # create the game virtual environment
+  # create the game's virtual environment
   $ python -m venv venv
 
-  # activate the game virtual environment
-  # Linux
+  # activate the game's virtual environment
   $ source ./venv/bin/activate
-  # Windows
-  $ .\venv\Scripts\activate
+  # or
+  $ ./venv/Scripts/activate.bat
 
-  # install the game required libraries
+  # install the game's required libraries
   $ pip install -r requirements.txt
 
   # launch the game
-  $ python .\piway\game.py
+  $ python ./piway/game.py
   ```
   <b>Note:</b> Python is <i>required</i> in order to run Piway's Game of Life.
 
