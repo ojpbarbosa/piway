@@ -16,9 +16,12 @@
   $ python -m venv venv
 
   # activate the game virtual environment
+  # Linux
+  $ source ./venv/bin/activate
+  # Windows
   $ .\venv\Scripts\activate
 
-  # install the game packages
+  # install the game required libraries
   $ pip install -r requirements.txt
 
   # launch the game
