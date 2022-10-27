@@ -3,10 +3,11 @@ import pygame
 
 
 class Button:
-    def __init__(self, screen, color, x, y, width, height, text):
+    def __init__(self, screen, background_color, text_color, x, y, width, height, text):
         self.screen = screen
 
-        self.color = color
+        self.background_color = background_color
+        self.text_color = text_color
 
         self.x = x
         self.y = y
@@ -16,24 +17,24 @@ class Button:
 
         self.text = text
 
-        self.font = pygame.font.Font('./fonts/emulogic.ttf', 60)
+        self.font = pygame.font.Font('./piway/fonts/emulogic.ttf', 32)
 
-    def draw(self, outline=None):
-        if outline:
-            pygame.draw.rect(self.screen, outline, (self.x - 2,
-                             self.y - 2, self.width + 4, self.height + 4), 0)
+        self.hovering = False
 
-        pygame.draw.rect(self.screen, self.color,
-                         (self.x, self.y, self.width, self.height), 0)
+    def draw(self):
+        pygame.draw.rect(self.screen, self.background_color,
+                         (self.x, self.y, self.width, self.height))
 
-        text = self.font.render(self.text, 1, (0, 0, 0))
+        text = self.font.render(self.text, 1, self.text_color)
 
         self.screen.blit(text, (self.x + (self.width / 2 - text.get_width() / 2),
                          self.y + (self.height / 2 - text.get_height() / 2)))
 
-    def hovering(self, x, y):
+    def is_hovering(self, x, y):
         if x > self.x and x < self.x + self.width:
             if y > self.y and y < self.y + self.height:
+                self.hovering = True
                 return True
 
+        self.hovering = False
         return False

@@ -1,9 +1,10 @@
 import pygame
+import tkinter as tk
 
 from icon import generate
 from theme import colors
 from piway import Piway
-# import Button from button
+from button import Button
 
 
 def piway():
@@ -17,7 +18,13 @@ def piway():
 
     piway = Piway(screen)
 
-    # restart_button = Button(screen, colors['primary'])
+    root = tk.Tk()
+
+    button_x = root.winfo_screenwidth() // 2 - 120
+    button_y = root.winfo_screenheight() - 82.5
+
+    restart_button = Button(
+        screen, colors['secondary'], colors['primary'], button_x, button_y, 240, 60, 'restart')
 
     running = True
 
@@ -41,16 +48,17 @@ def piway():
 
             piway.handle_click(x, y)
 
-          #   if restart_button.hovering(x, y):
-          #       restart_button.draw()
+            if restart_button.is_hovering(x, y):
+                piway.restart()
 
         piway.compute_next_generation()
 
-        if piway.cell_count > 0:
-            print('Cell count: ' + str(piway.cell_count))
-            print('Alive cells: ' + str(piway.alive_cells))
-            print('Dead cells: ' + str(piway.dead_cells))
+        # if piway.cell_count > 0:
+        #     print('Cell count: ' + str(piway.cell_count))
+        #     print('Alive cells: ' + str(piway.alive_cells))
+        #     print('Dead cells: ' + str(piway.dead_cells))
 
+        restart_button.draw()
         pygame.display.update()
 
     pygame.quit()

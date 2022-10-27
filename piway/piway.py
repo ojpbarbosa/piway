@@ -13,10 +13,11 @@ class Piway:
         self.world = []
 
         root = tk.Tk()
-        self.columns = root.winfo_screenwidth() // 24  # 24px per cell
-        # self.rows = int(root.winfo_screenheight() *
-        #                 0.9) // 24 # 90% of screen height
-        self.rows = root.winfo_screenheight() // 24
+
+        # 24px per cell
+        self.columns = root.winfo_screenwidth() // 24
+        self.rows = int(root.winfo_screenheight() *
+                        0.9) // 24  # 90% of screen height
 
         self.world = np.ndarray(shape=(self.columns, self.rows), dtype=int)
 
@@ -104,3 +105,17 @@ class Piway:
 
         else:
             self.world[scaled_x, scaled_y] = 0
+
+    def restart(self):
+        self.world = np.ndarray(shape=(self.columns, self.rows), dtype=int)
+
+        for y in range(self.rows):
+            for x in range(self.columns):
+                self.world[x, y] = 0
+
+        self.alive_cells = 0
+        self.dead_cells = 0
+        self.cell_count = 0
+        self.generation = 0
+
+        self.paused = True
