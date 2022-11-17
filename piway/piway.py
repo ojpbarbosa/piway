@@ -106,6 +106,9 @@ class Piway:
         else:
             self.world[scaled_x, scaled_y] = 0
 
+            self.alive_cells -= 1
+            self.dead_cells += 1
+
     def restart(self):
         self.world = np.ndarray(shape=(self.columns, self.rows), dtype=int)
 

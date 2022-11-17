@@ -5,6 +5,7 @@ from icon import generate
 from theme import colors
 from piway import Piway
 from button import Button
+from utilities import human_format
 
 
 def piway():
@@ -27,6 +28,8 @@ def piway():
         screen, colors['secondary'], colors['primary'], button_x, button_y, 240, 60, 'restart')
 
     running = True
+
+    font = pygame.font.Font('./piway/fonts/emulogic.ttf', 24)
 
     while running:
         screen.fill(colors['primary'])
@@ -53,12 +56,29 @@ def piway():
 
         piway.compute_next_generation()
 
-        # if piway.cell_count > 0:
-        #     print('Cell count: ' + str(piway.cell_count))
-        #     print('Alive cells: ' + str(piway.alive_cells))
-        #     print('Dead cells: ' + str(piway.dead_cells))
+        screen.blit(font.render(
+            'Cell count: ' + human_format(piway.cell_count), 1, colors['secondary']), (15,
+                                                                                       root.winfo_screenheight() - 100
+                                                                                       ))
 
-        restart_button.draw()
+        screen.blit(font.render(
+            'Alive cells: ' + human_format(piway.alive_cells), 1, colors['secondary']), (15,
+                                                                                         root.winfo_screenheight() - 70
+                                                                                         ))
+
+        screen.blit(font.render(
+            'Dead cells: ' + human_format(piway.dead_cells), 1, colors['secondary']), (15,
+                                                                                       root.winfo_screenheight() - 40
+                                                                                       ))
+
+        x, y = pygame.mouse.get_pos()
+        if restart_button.is_hovering(x, y):
+            pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
+            restart_button.draw_hovering()
+        else:
+            pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+            restart_button.draw()
+
         pygame.display.update()
 
     pygame.quit()

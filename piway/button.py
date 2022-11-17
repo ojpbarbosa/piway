@@ -30,6 +30,18 @@ class Button:
         self.screen.blit(text, (self.x + (self.width / 2 - text.get_width() / 2),
                          self.y + (self.height / 2 - text.get_height() / 2)))
 
+    def draw_hovering(self):
+        pygame.draw.rect(self.screen, self.text_color,
+                         (self.x, self.y, self.width, self.height))
+
+        text = self.font.render(self.text, 1, self.background_color)
+
+        self.screen.blit(text, (self.x + (self.width / 2 - text.get_width() / 2),
+                         self.y + (self.height / 2 - text.get_height() / 2)))
+
+        pygame.draw.rect(self.screen, self.background_color,
+                         (self.x, self.y, self.width, self.height), 2)
+
     def is_hovering(self, x, y):
         if x > self.x and x < self.x + self.width:
             if y > self.y and y < self.y + self.height:
