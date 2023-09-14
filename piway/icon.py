@@ -6,7 +6,7 @@ from os import listdir, mkdir
 from theme import colors
 
 
-def generate():
+def generate_icon():
     image = Image.new('RGB', (256, 256), colors['primary'])
     draw = ImageDraw.Draw(image)
 
@@ -20,15 +20,15 @@ def generate():
 
                 count += 1
 
-    timestamp = datetime.timestamp(datetime.now())
+    if 'icons' not in listdir('./piway/assets'):
+        mkdir('./piway/assets/icons')
 
-    if 'icons' not in listdir():
-        mkdir('icons')
+    filename = f'./piway/assets/icons/{datetime.now().strftime("%Y_%m_%d_%H_%M_%S")}.png'
 
-    image.save(f'./icons/{timestamp}.png')
+    image.save(filename)
 
-    return f'./icons/{timestamp}.png'
+    return filename
 
 
 if __name__ == '__main__':
-    generate()
+    generate_icon()

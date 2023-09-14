@@ -1,4 +1,4 @@
-# https://www.youtube.com/watch?v=4_9twnEduFA
+# reference: https://www.youtube.com/watch?v=4_9twnEduFA
 import pygame
 
 
@@ -17,7 +17,7 @@ class Button:
 
         self.text = text
 
-        self.font = pygame.font.Font('./piway/fonts/emulogic.ttf', 32)
+        self.font = pygame.font.Font('./piway/assets/fonts/emulogic.ttf', 32)
 
         self.hovering = False
 
