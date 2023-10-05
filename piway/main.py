@@ -20,17 +20,22 @@ def main():
 
     piway = Piway(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
-    button_x = SCREEN_WIDTH // 2 - 420
+    BUTTON_WIDTH = 240
+    BUTTON_HEIGHT = 60
+
+    MARGIN = 15
+
+    quit_button_x = SCREEN_WIDTH - MARGIN - BUTTON_WIDTH
     button_y = SCREEN_HEIGHT - 82.5
 
-    pause_button = Button(
-        screen, colors['secondary'], colors['primary'], button_x, button_y, 240, 60, 'pause')
+    quit_button = Button(
+        screen, colors['secondary'], colors['primary'], quit_button_x, button_y, BUTTON_WIDTH, BUTTON_HEIGHT, 'quit')
 
     restart_button = Button(
-        screen, colors['secondary'], colors['primary'], pause_button.x + 300, button_y, 240, 60, 'restart')
+        screen, colors['secondary'], colors['primary'], quit_button_x - BUTTON_WIDTH - MARGIN, button_y, BUTTON_WIDTH, BUTTON_HEIGHT, 'restart')
 
-    quit_button = Button(
-        screen, colors['secondary'], colors['primary'], restart_button.x + 300, button_y, 240, 60, 'quit')
+    pause_button = Button(
+        screen, colors['secondary'], colors['primary'], restart_button.x - BUTTON_WIDTH - MARGIN, button_y, BUTTON_WIDTH, BUTTON_HEIGHT, 'pause')
 
     running = True
 
@@ -65,17 +70,17 @@ def main():
         piway.compute_next_generation()
 
         screen.blit(font.render(
-            'cells: ' + human_format(piway.cell_count), 1, colors['secondary']), (15,
-                                                                                       SCREEN_HEIGHT - 100
-                                                                                       ))
+            'cells: ' + human_format(piway.cell_count), 1, colors['secondary']), (MARGIN,
+                                                                                  SCREEN_HEIGHT - 100
+                                                                                  ))
 
         screen.blit(font.render(
-            'alive cells: ' + human_format(piway.alive_cells), 1, colors['secondary']), (15,
+            'alive cells: ' + human_format(piway.alive_cells), 1, colors['secondary']), (MARGIN,
                                                                                          SCREEN_HEIGHT - 70
                                                                                          ))
 
         screen.blit(font.render(
-            'dead cells: ' + human_format(piway.dead_cells), 1, colors['secondary']), (15,
+            'dead cells: ' + human_format(piway.dead_cells), 1, colors['secondary']), (MARGIN,
                                                                                        SCREEN_HEIGHT - 40
                                                                                        ))
 
