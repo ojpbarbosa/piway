@@ -37,6 +37,9 @@ def main():
     pause_button = Button(
         screen, colors['secondary'], colors['primary'], restart_button.x - BUTTON_WIDTH - MARGIN, button_y, BUTTON_WIDTH, BUTTON_HEIGHT, 'pause')
 
+    gosper_glider_gun_button = Button(
+        screen, colors['secondary'], colors['primary'], pause_button.x - BUTTON_WIDTH - MARGIN, button_y, BUTTON_WIDTH, BUTTON_HEIGHT, 'ggg')
+
     running = True
 
     font = pygame.font.Font('./piway/assets/fonts/emulogic.ttf', 24)
@@ -67,6 +70,9 @@ def main():
             elif pause_button.is_hovering(x, y):
                 piway.paused = not piway.paused
 
+            elif gosper_glider_gun_button.is_hovering(x, y):
+                piway.load_matrix_from_file('gosper_glider_gun')
+
         piway.compute_next_generation()
 
         screen.blit(font.render(
@@ -92,6 +98,8 @@ def main():
         pause_button.text = 'play' if piway.paused else 'pause'
         pause_button.draw()
 
+        gosper_glider_gun_button.draw()
+
         if restart_button.is_hovering(x, y):
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
             restart_button.draw_hovering()
@@ -101,6 +109,9 @@ def main():
         elif pause_button.is_hovering(x, y):
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
             pause_button.draw_hovering()
+        elif gosper_glider_gun_button.is_hovering(x, y):
+            pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
+            gosper_glider_gun_button.draw_hovering()
         else:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
 

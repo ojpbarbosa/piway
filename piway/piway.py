@@ -115,5 +115,16 @@ class Piway:
         self.dead_cells = 0
         self.cell_count = 0
         self.generation = 0
-
         self.paused = True
+
+    def load_matrix_from_file(self, file):
+        self.matrix = np.load(f'./piway/presets/{file}.npy')
+        self.alive_cells = self.cell_count = np.count_nonzero(self.matrix)
+        self.dead_cells = 0
+        self.generation = 0
+        self.paused = True
+
+    def save_matrix_to_file(self, file):
+        with open(f'./piway/presets/{file}.npy', 'wb+') as f:
+            np.save(f, self.matrix)
+        f.close()
