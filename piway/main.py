@@ -18,7 +18,7 @@ def main():
     pygame.display.set_caption('Piway\'s Game of Life')
     pygame.display.set_icon(pygame.image.load(generate_icon()))
 
-    piway = Piway(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+    piway = Piway(screen, SCREEN_WIDTH, SCREEN_HEIGHT, 0.15)
 
     BUTTON_WIDTH = 240
     BUTTON_HEIGHT = 60
@@ -55,6 +55,15 @@ def main():
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE or event.key == pygame.K_p:
                     piway.paused = not piway.paused
+
+                elif event.key == pygame.K_q:
+                    running = False
+
+                elif event.key == pygame.K_r:
+                    piway.restart()
+
+                elif event.key == pygame.K_g:
+                    piway.load_matrix_from_file('gosper_glider_gun')
 
         if pygame.mouse.get_pressed()[0]:
             x, y = pygame.mouse.get_pos()
